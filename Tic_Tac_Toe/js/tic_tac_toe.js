@@ -1,5 +1,6 @@
+//Determines if its Player X's turn , if not X then "O's"
 let activePlayer = 'X';
-//stores array of moves. determines win conditions.
+//Stores an array of the players moves and dfetermines win conditions
 let selectedSquares = [];
 
 //function for placing an x or o in a square
@@ -8,9 +9,9 @@ function placeXOrO(squareNumber) {
     //.some() checks each element of selected square array
     //to see if it contains the square number clicked on
     if (!selectedSquares.some(element => element.includes(squareNumber))) {
-        //retrieves the html element id clicked 
+        //set the variable select to the squareNumber element
         let select = document.getElementById(squareNumber);
-        //checks who's turn it ise
+        //cchecks to see if its player x's turne
         if (activePlayer === 'X') {
             //if activePlayer = X, x.png is placed
             select.style.backgroundImage = 'url("./images/Flame.png")';
@@ -46,7 +47,7 @@ function placeXOrO(squareNumber) {
         if (activePlayer === 'O') {
             //function disables clicking for computer's choice
             disableClick();
-            //function waits 1 second b4 comp places image and eneable click.
+            //function waits one second before computer places image and enable click.
             setTimeout(function () { computersTurn(); }, 1000)
         }
         //returning true needed for computersTurn() to work.
@@ -85,6 +86,7 @@ function checkWinConditions() {
     else if (arrayIncludes('2X', '5X', '8X')) { drawWinLine(508, 50, 508, 558) }
     else if (arrayIncludes('6X', '4X', '2X')) { drawWinLine(100, 508, 510, 90) }
     else if (arrayIncludes('0X', '4X', '8X')) { drawWinLine(100, 100, 520, 520) }
+    //O 0 ,1, 2 condition
     else if (arrayIncludes('0O', '1O', '2O')) { drawWinLine(50, 100, 558, 100) }
     else if (arrayIncludes('3O', '4O', '5O')) { drawWinLine(50, 304, 558, 304) }
     else if (arrayIncludes('6O', '7O', '8O')) { drawWinLine(50, 508, 558, 508) }
@@ -97,7 +99,7 @@ function checkWinConditions() {
     else if (selectedSquares.length >= 9) {
             //plays the tie game sound
             audio('./media/tiegame.mp3');
-            //sets a .3 sec timer b4 resetGame is called
+            //sets a .3 sec timer before resetGame is called
             setTimeout(function () { resetGame(); }, 1000);
         }
         //function checks if array includes 3 strings. checks for win condition.
@@ -106,7 +108,7 @@ function checkWinConditions() {
             const a = selectedSquares.includes(squareA)
             const b = selectedSquares.includes(squareB)
             const c = selectedSquares.includes(squareC)
-            //if 3 variables are all included in the array true is returned and elese if 
+            //if three variables are all included in the array true is returned and elese if 
             //condition executes the drawWinLine function.
             if (a === true && b === true && c === true) { return true }
         }
